@@ -39,13 +39,13 @@ jobs:
     - name: Generate Build Files & Build (Linux)
       if: ${{ matrix.os == 'ubuntu-22.04' }}
       run: |
-        make all GENERATOR=Ninja BUILD_TYPE=Release NUM_JOBS=4
+        make all BUILD_TYPE=Release NUM_JOBS=4
 
     - name: Generate Build Files & Build (Windows)
       shell: msys2 {0}
       if: ${{ matrix.os == 'windows-2022' }}
       run: |
-        mingw32-make all GENERATOR="Ninja" BUILD_TYPE=Release NUM_JOBS=4
+        mingw32-make all BUILD_TYPE=Release NUM_JOBS=4
 
     - name: Upload Artifacts (Linux)
       if: ${{ matrix.os == 'ubuntu-22.04' }}
