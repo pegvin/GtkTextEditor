@@ -20,7 +20,7 @@ jobs:
       if: ${{ matrix.os == 'ubuntu-22.04' }}
       run: |
         sudo apt-get update -y
-        sudo apt-get install gcc libgtk-4-1 libgtk-4-dev ninja-build -y
+        sudo apt-get install gcc libglib2.0-0 libgtk-4-1 libgtk-4-dev ninja-build -y
         sudo snap install cmake --classic
 
     - name: Install Deps (Windows)
