@@ -31,8 +31,8 @@ target_compile_options(GtkExample PRIVATE
 )
 
 if(WIN32)
-	add_custom_command(TARGET csprite POST_BUILD
-		COMMAND ${CMAKE_COMMAND} -E copy -t $<TARGET_FILE_DIR:csprite> $<TARGET_RUNTIME_DLLS:csprite>
+	add_custom_command(TARGET GtkExample POST_BUILD
+		COMMAND ${CMAKE_COMMAND} -E copy -t $<TARGET_FILE_DIR:GtkExample> $<TARGET_RUNTIME_DLLS:GtkExample>
 		COMMAND_EXPAND_LISTS
 	)
 endif()
