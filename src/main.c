@@ -1,4 +1,5 @@
 #include <gtk/gtk.h>
+#include <gio/gioenums.h>
 
 static void print_hello(GtkWidget* widget, gpointer data) {
 	(void)widget; (void)data;
