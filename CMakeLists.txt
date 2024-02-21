@@ -23,16 +23,9 @@ if(CMAKE_BUILD_TYPE STREQUAL Debug)
 	endif()
 endif()
 
-target_link_libraries(GtkExample PRIVATE PkgConfig::GTK4)
+target_link_libraries(GtkExample PUBLIC PkgConfig::GTK4)
 
-target_compile_options(GtkExample PRIVATE
+target_compile_options(GtkExample PUBLIC
 	$<$<CXX_COMPILER_ID:MSVC>:/W4>
 	$<$<NOT:$<CXX_COMPILER_ID:MSVC>>:-Wall -Wextra -Wpedantic>
 )
-
-if(WIN32)
-	add_custom_command(TARGET GtkExample POST_BUILD
-		COMMAND ${CMAKE_COMMAND} -E copy -t $<TARGET_FILE_DIR:GtkExample> $<TARGET_RUNTIME_DLLS:GtkExample>
-		COMMAND_EXPAND_LISTS
-	)
-endif()
