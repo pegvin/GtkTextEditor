@@ -9,7 +9,7 @@ set(CMAKE_C_EXTENSIONS OFF)
 project(GtkExample C)
 
 find_package(PkgConfig REQUIRED)
-pkg_check_modules(GTK REQUIRED gtk4)
+pkg_check_modules(GTK4 REQUIRED IMPORTED_TARGET gtk4)
 
 file(GLOB_RECURSE SRC_FILES src/*.c)
 add_executable(GtkExample ${SRC_FILES})
@@ -23,9 +23,7 @@ if(CMAKE_BUILD_TYPE STREQUAL Debug)
 	endif()
 endif()
 
-target_include_directories(GtkExample PRIVATE ${GTK_INCLUDE_DIRS})
-target_link_directories(GtkExample PRIVATE ${GTK_LIBRARY_DIRS})
-target_link_libraries(GtkExample PRIVATE ${GTK_LIBRARIES})
+target_link_libraries(GtkExample PRIVATE PkgConfig::GTK4)
 
 target_compile_options(GtkExample PRIVATE
 	$<$<CXX_COMPILER_ID:MSVC>:/W4>
