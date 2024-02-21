@@ -25,8 +25,15 @@ jobs:
 
     - name: Install Deps (Windows)
       if: ${{ matrix.os == 'windows-2022' }}
-      run: |
-        choco install gtk-runtime
+      uses: msys2/setup-msys2@v2
+      with:
+        update: true
+        install: >-
+          git
+          mingw-w64-x86_64-curl
+          mingw-w64-x86_64-make
+          mingw-w64-x86_64-cmake
+          mingw-w64-x86_64-gtk4
 
     - name: Generate Build Files & Build (Linux)
       if: ${{ matrix.os == 'ubuntu-22.04' }}
@@ -34,6 +41,7 @@ jobs:
         make all GENERATOR=Ninja BUILD_TYPE=Release NUM_JOBS=4
 
     - name: Generate Build Files & Build (Windows)
+      shell: msys2 {0}
       if: ${{ matrix.os == 'windows-2022' }}
       run: |
         make all GENERATOR="Visual Studio 17 2022" BUILD_TYPE=Release NUM_JOBS=4 CMAKE_GEN_FLAGS='-A "x64" -T "ClangCL"'
